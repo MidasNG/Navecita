@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //Datos iniciales para el botón de volver a jugar
         minutes = 1;
         seconds = 30;
         coinsCollected = 0;
@@ -88,25 +89,30 @@ public class GameManager : MonoBehaviour
         else timerText.text = "Time: " + minutes + ":0" + seconds;
     }
 
+    //Contador de monedas
     public void CoinUp()
     {
         coinsCollected++;
         coinText.text = "Coins: " + coinsCollected;
     }
 
+    //Contador de aros
     public void RingUp()
     {
         ringsPassed++;
         ringText.text = "Rings: " + ringsPassed;
     }
 
+    //Final del juego
     public void GameOver()
     {
+        //El tiempo se para y se activa el Canvas con datos de victoria/derrota
         Time.timeScale = 0;
         endCanvas.SetActive(true);
         if (seconds == 0 && minutes == 0) defeatText.gameObject.SetActive(true);
         else victoryText.gameObject.SetActive(true);
 
+        //Se rellenan los datos en la pantalla
         endCoinText.text = coinsCollected.ToString();
         endRingText.text = ringsPassed.ToString();
         if (seconds >= 10) endTimeText.text = "Time: " + minutes + ":" + seconds;
@@ -115,18 +121,25 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Total Score: " + (minutes * 60 + seconds + coinsCollected*2);
     }
 
+    //Botón de volver a jugar
     public void Restart()
     {
+        //El tiempo vuelve a moverse y se eliminan las monedas
         Time.timeScale = 1;
         foreach (Coin coin in GameObject.FindObjectsOfType<Coin>()) Destroy(coin.gameObject);
+
+        //Se desactiva la interfaz de victoria/derrota
         endCanvas.SetActive(false);
         defeatText.gameObject.SetActive(false);
         victoryText.gameObject.SetActive(false);
+
+        //Se ejecutan los Start de los managers y la nave para reiniciar el juego
         Start();
         player.GetComponent<Nave>().Start();
         GetComponent<AroManager>().Start();
     }
 
+    //Botón de salir
     public void Quit()
     {
         Application.Quit();

@@ -15,6 +15,7 @@ public class Nave : MonoBehaviour
 
     public TextMeshProUGUI speedText;
 
+    //Datos iniciales para el botón de volver a jugar
     public void Start()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);

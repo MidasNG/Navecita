@@ -20,15 +20,19 @@ public class Coin : MonoBehaviour
 
    private void Update()
     {
+        //Animación de movimiento arriba/abajo con suavizado en los extremos
         t = Mathf.Clamp01(t + Time.deltaTime * moveSpeed);
         transform.localPosition = new Vector3(0, Mathf.Lerp(-0.15f, 0.15f, easing.Evaluate(t)), 0);
 
+        //Se invierte la dirección
         if (t == 0 || t == 1) moveSpeed = -moveSpeed;
 
+        //Rotación constante en función de la distancia al jugador
         rotateSpeed = maxRotateSpeed / Vector3.Distance(transform.position, player.transform.position) * 15;
         transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
     }
 
+    //Recolección de monedas
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
