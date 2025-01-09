@@ -14,9 +14,6 @@ public class GameManager : MonoBehaviour
     private int coinsCollected, ringsPassed, minutes = 1, seconds = 30;
     private float time = 1;
 
-    //Para crear las monedas he utilizado dos fases para los dos grupos de aros. Usando List<int> puedo eliminar los números de posiciones posibles sin problemas de posiciones nulas.
-    //En ambas fases se eliminan 10 posiciones aleatorias (15 monedas de 25 posiciones y 5 monedas de 15 posiciones).
-    //La lista de posiciones posibles se borra antes de la segunda fase para llenarla con posiciones nuevas.
     private void Start()
     {
         minutes = 1;
@@ -27,6 +24,10 @@ public class GameManager : MonoBehaviour
         ringText.text = "Rings: " + ringsPassed;
         coinText.text = "Coins: " + coinsCollected;
         endTimeText.text = "Time: " + minutes + ":" + seconds;
+
+        //Para crear las monedas he utilizado dos fases para los dos grupos de aros. Usando List<int> puedo eliminar los números de posiciones posibles sin problemas de posiciones nulas.
+        //En ambas fases se eliminan 10 posiciones aleatorias (15 monedas de 25 posiciones y 5 monedas de 15 posiciones).
+        //La lista de posiciones posibles se borra antes de la segunda fase para llenarla con posiciones nuevas.
 
         //Primeros 5 aros
         possibleSpawns = new List<int>();
